@@ -33,7 +33,7 @@ function callbackAdd(data) {
 	<ul id="${data.key}">
 		<li>${data.val().content.substr(0, 16)}</li>
 		<li>${timeConverter(data.val().saveTime)}</li>
-		<li onclick="delData(this);">x</li>
+		<li onclick="delData(this);" class="hand">x</li>
 	</ul>`;
 	li.append(html);
 }
@@ -41,7 +41,8 @@ function callbackChg(data) {
 	log("수정", data.key, data.val());
 }
 function callbackRev(data) {
-	log("삭제", data.key, data.val());
+	//log("삭제", data.key, data.val());
+	$("#"+data.key).remove();
 }
 
 
@@ -66,6 +67,14 @@ $("#bt_save").click(function(){
 $("#bt_cancel").click(function(){
 	ta.val('');
 });
+function delData(obj) {
+	if(confirm("정말로 삭제하시겠습니까?")) {
+		var id = $(obj).parent().attr("id");
+		ref = db.ref("root/note/"+user.uid+"/"+id);
+		ref.remove();
+	}
+}
+
 
 //인증구현
 $("#bt_google_login").click(function(){
