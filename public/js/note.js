@@ -16,6 +16,26 @@ var google = new firebase.auth.GoogleAuthProvider();
 var user = null;
 var ta = $("#content");
 
+//signIn 되면 실행되는 함수
+function init(){
+	ref = db.ref("root/note/"+user.uid);
+	ref.on("child_added", callbackAdd);
+	ref.on("child_changed", callbackChg);
+	ref.on("child_remove", callbackRev);
+}
+
+//데이터베이스 콜백함수들
+function callbackAdd(data) {
+	log("추가", data.key, data.val());
+}
+function callbackChg(data) {
+	log("수정", data.key, data.val());
+}
+function callbackRev(data) {
+	log("삭제", data.key, data.val());
+}
+
+
 //데이터베이스 구현
 $("#bt_add").click(function(){
 	
@@ -55,6 +75,7 @@ auth.onAuthStateChanged(function(data){
 		$(".email").html(user.email);
 		$(".symbol").show();
 		$(".symbol > img").attr("src", user.photoURL);
+		init();
 	}
 	else {
 		//signOut 상태
