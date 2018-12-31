@@ -16,7 +16,14 @@
 .symbol > img {width:2em;}
 
 .section {width:100%; position:relative; height:calc(100% - 5rem);}
-.navs {float:left; width:35%; height:100%;}
+
+.navs {float:left; width:35%; height:100%; font-size:1rem; overflow-y:auto;}
+.navs > ul {border-bottom:1px solid #f1f1f1; position:relative;}
+.navs > ul > li {padding:0.5em;}
+.navs > ul > li:first-child {font-size:1.25em; color:rgb(15, 67, 163); font-weight:bold;}
+.navs > ul > li:nth-child(2) {font-size:0.75em; color:rgb(100, 100, 100);}
+.navs > ul > li:last-child {color:#f00; font-weight:bold; font-size:1.5em; position: absolute; background-color:#fff; right:0; top:50%; transform:translateY(-50%);}
+
 .conts {float:right; width:65%; height:100%; border-left:2px solid #f1f1f1; padding:2%;}
 .conts > textarea {height:80%; font-size:1.5em;}
 
