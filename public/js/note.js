@@ -14,10 +14,28 @@ var ref = null;
 var auth = firebase.auth();
 var google = new firebase.auth.GoogleAuthProvider();
 var user = null;
+var ta = $("#content");
 
 //데이터베이스 구현
 $("#bt_add").click(function(){
 	
+});
+$("#bt_save").click(function(){
+	var content = ta.val();
+	if(content == '') {
+		alert("내용을 입력하세요.");
+		ta.focus();
+	}
+	else {
+		ref = db.ref("root/note/"+user.uid);
+		ref.push({
+			content: content,
+			saveTime: new Date().getTime()
+		}).key;
+	}
+});
+$("#bt_cancel").click(function(){
+	ta.val('');
 });
 
 //인증구현
